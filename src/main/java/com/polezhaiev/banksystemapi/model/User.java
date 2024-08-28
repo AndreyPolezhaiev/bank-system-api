@@ -5,8 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -30,6 +36,14 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany
+    @JoinTable(name = "users_bank_cards",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "bank_card_id"))
+    private List<BankCard> bankCards;
 
     public User() {
     }
