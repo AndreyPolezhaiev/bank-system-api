@@ -12,6 +12,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+
 @Entity
 @Data
 @Table(name = "bank_cards")
@@ -23,9 +25,15 @@ public class BankCard {
     @Column(nullable = false, name = "card_number", unique = true)
     private String cardNumber;
 
+    @Column(nullable = false)
+    private BigDecimal balance;
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
+
+    public BankCard() {
+    }
 }
