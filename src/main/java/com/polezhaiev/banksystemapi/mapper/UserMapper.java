@@ -19,7 +19,7 @@ public interface UserMapper {
     User toModel(UserRegistrationRequestDto requestDto);
 
     UserResponseDto toResponseDto(User user);
-    @Mapping(target = "bankCards", ignore = true)
+    @Mapping(target = "cardsBalance", ignore = true)
     UserDetailedInfoResponseDto toDetailedInfoResponseDto(User user);
 
     @AfterMapping

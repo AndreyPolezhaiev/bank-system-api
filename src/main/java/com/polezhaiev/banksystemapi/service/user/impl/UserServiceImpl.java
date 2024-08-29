@@ -13,6 +13,8 @@ import com.polezhaiev.banksystemapi.repository.BankCardRepository;
 import com.polezhaiev.banksystemapi.repository.UserRepository;
 import com.polezhaiev.banksystemapi.service.user.UserService;
 import java.util.List;
+import java.util.Set;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,17 +31,19 @@ public class UserServiceImpl implements UserService {
             throw new UserRegistrationException("There is already a user with such email");
         }
         User user = userMapper.toModel(requestDto);
+        user.setBankCards(Set.of());
+        User saved = userRepository.save(user);
 
         BankCard bankCard = new BankCard();
         bankCard.setUser(user);
         bankCard.setBalance(requestDto.getInitialBalance());
         bankCard.setCardNumber(requestDto.getBankCard());
-        bankCardRepository.save(bankCard);
+        BankCard savedBankCard = bankCardRepository.save(bankCard);
 
-        user.getBankCards().add(bankCard);
-        User saved = userRepository.save(user);
+        saved.getBankCards().add(savedBankCard);
+        User savedUser = userRepository.save(saved);
 
-        return userMapper.toResponseDto(saved);
+        return userMapper.toResponseDto(savedUser);
     }
 
     @Override
