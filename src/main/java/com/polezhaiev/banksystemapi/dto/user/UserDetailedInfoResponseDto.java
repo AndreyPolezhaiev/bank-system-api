@@ -11,6 +11,5 @@ public class UserDetailedInfoResponseDto {
     private String lastName;
     private String phoneNumber;
     private String email;
-    private String password;
     private Map<String, BigDecimal> cardsBalance;
 }

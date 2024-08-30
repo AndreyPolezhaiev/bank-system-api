@@ -15,11 +15,7 @@ public class TransferRequestDto {
     @NotNull
     private String bankCardSend;
     @NotNull
-    private BigDecimal depositFoundsSend;
-    @NotNull
     private String emailGet;
     @NotNull
     private String bankCardGet;
-    @NotNull
-    private BigDecimal depositFoundsGet;
 }
