@@ -1,4 +1,4 @@
-package com.polezhaiev.banksystemapi.controller;
+package com.polezhaiev.banksystemapi.controller.user;
 
 import com.polezhaiev.banksystemapi.dto.user.UserDetailedInfoRequestDto;
 import com.polezhaiev.banksystemapi.dto.user.UserDetailedInfoResponseDto;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Tag(name = "Bank system api", description = "Endpoints for bank system api")
+@Tag(name = "Bank system api", description = "Endpoints for user controller")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/users")

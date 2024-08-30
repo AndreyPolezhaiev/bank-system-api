@@ -1,4 +1,4 @@
-package com.polezhaiev.banksystemapi.exception;
+package com.polezhaiev.banksystemapi.exception.app;
 
 public class EntityNotFoundException extends RuntimeException {
     public EntityNotFoundException(String message) {

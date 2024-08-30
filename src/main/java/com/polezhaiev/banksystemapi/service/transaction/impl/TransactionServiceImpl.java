@@ -5,6 +5,7 @@ import com.polezhaiev.banksystemapi.dto.transaction.DepositRequestDto;
 import com.polezhaiev.banksystemapi.dto.transaction.TransferRequestDto;
 import com.polezhaiev.banksystemapi.dto.transaction.TransferResponseDto;
 import com.polezhaiev.banksystemapi.dto.transaction.WithdrawRequestDto;
+import com.polezhaiev.banksystemapi.exception.app.TransactionLackOfMoneyException;
 import com.polezhaiev.banksystemapi.model.BankCard;
 import com.polezhaiev.banksystemapi.model.User;
 import com.polezhaiev.banksystemapi.repository.BankCardRepository;
@@ -40,7 +41,11 @@ public class TransactionServiceImpl implements TransactionService {
         bankCard.setBalance(bankCard.getBalance().add(requestDto.getDepositFounds()));
         BankCard updatedCard = bankCardRepository.save(bankCard);
 
-        return new ChangeBalanceResponseDto(user.getEmail(), updatedCard.getBalance());
+        return new ChangeBalanceResponseDto(
+                user.getEmail(),
+                updatedCard.getCardNumber(),
+                updatedCard.getBalance()
+        );
     }
 
     @Override
@@ -59,12 +64,20 @@ public class TransactionServiceImpl implements TransactionService {
                                 "Invalid card number: " + requestDto.getBankCard())
                 );
 
+        if (bankCard.getBalance().compareTo(requestDto.getWithdrawFounds()) < 0) {
+            throw new TransactionLackOfMoneyException("Not enough money on the balance to withdraw");
+        }
         bankCard.setBalance(bankCard.getBalance().subtract(requestDto.getWithdrawFounds()));
         BankCard updatedCard = bankCardRepository.save(bankCard);
 
-        return new ChangeBalanceResponseDto(user.getEmail(), updatedCard.getBalance());
+        return new ChangeBalanceResponseDto(
+                user.getEmail(),
+                updatedCard.getCardNumber(),
+                updatedCard.getBalance()
+        );
     }
 
+    @Transactional
     @Override
     public TransferResponseDto transfer(TransferRequestDto requestDto) {
         if (userRepository.findByEmail(requestDto.getEmailSend()).isEmpty()) {
@@ -94,6 +107,10 @@ public class TransactionServiceImpl implements TransactionService {
                                 "Invalid card number of getting user: " + requestDto.getBankCardGet())
                 );
 
+        if (bankCardSend.getBalance().compareTo(requestDto.getTransferFounds()) < 0) {
+            throw new TransactionLackOfMoneyException("Not enough money on the balance to send");
+        }
+
         bankCardSend.setBalance(bankCardSend.getBalance().subtract(requestDto.getTransferFounds()));
         bankCardGet.setBalance(bankCardGet.getBalance().add(requestDto.getTransferFounds()));
 
@@ -103,6 +120,8 @@ public class TransactionServiceImpl implements TransactionService {
         TransferResponseDto responseDto = new TransferResponseDto();
         String message = "Founds "
                 + requestDto.getTransferFounds()
+                + " from bankCard "
+                + bankCardSend.getCardNumber()
                 + " were sent to user with email "
                 + requestDto.getEmailGet();
         responseDto.setMessage(message);
