@@ -1,9 +1,9 @@
 package com.polezhaiev.banksystemapi.controller;
 
-import com.polezhaiev.banksystemapi.dto.UserDetailedInfoRequestDto;
-import com.polezhaiev.banksystemapi.dto.UserDetailedInfoResponseDto;
-import com.polezhaiev.banksystemapi.dto.UserRegistrationRequestDto;
-import com.polezhaiev.banksystemapi.dto.UserResponseDto;
+import com.polezhaiev.banksystemapi.dto.user.UserDetailedInfoRequestDto;
+import com.polezhaiev.banksystemapi.dto.user.UserDetailedInfoResponseDto;
+import com.polezhaiev.banksystemapi.dto.user.UserRegistrationRequestDto;
+import com.polezhaiev.banksystemapi.dto.user.UserResponseDto;
 import com.polezhaiev.banksystemapi.service.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

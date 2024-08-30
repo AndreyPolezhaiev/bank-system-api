@@ -1,9 +1,9 @@
 package com.polezhaiev.banksystemapi.mapper;
 
 import com.polezhaiev.banksystemapi.config.MapperConfig;
-import com.polezhaiev.banksystemapi.dto.UserDetailedInfoResponseDto;
-import com.polezhaiev.banksystemapi.dto.UserRegistrationRequestDto;
-import com.polezhaiev.banksystemapi.dto.UserResponseDto;
+import com.polezhaiev.banksystemapi.dto.user.UserDetailedInfoResponseDto;
+import com.polezhaiev.banksystemapi.dto.user.UserRegistrationRequestDto;
+import com.polezhaiev.banksystemapi.dto.user.UserResponseDto;
 import com.polezhaiev.banksystemapi.model.BankCard;
 import com.polezhaiev.banksystemapi.model.User;
 import java.math.BigDecimal;

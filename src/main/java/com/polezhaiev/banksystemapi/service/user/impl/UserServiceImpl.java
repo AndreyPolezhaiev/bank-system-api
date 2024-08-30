@@ -1,9 +1,9 @@
 package com.polezhaiev.banksystemapi.service.user.impl;
 
-import com.polezhaiev.banksystemapi.dto.UserDetailedInfoRequestDto;
-import com.polezhaiev.banksystemapi.dto.UserDetailedInfoResponseDto;
-import com.polezhaiev.banksystemapi.dto.UserRegistrationRequestDto;
-import com.polezhaiev.banksystemapi.dto.UserResponseDto;
+import com.polezhaiev.banksystemapi.dto.user.UserDetailedInfoRequestDto;
+import com.polezhaiev.banksystemapi.dto.user.UserDetailedInfoResponseDto;
+import com.polezhaiev.banksystemapi.dto.user.UserRegistrationRequestDto;
+import com.polezhaiev.banksystemapi.dto.user.UserResponseDto;
 import com.polezhaiev.banksystemapi.exception.EntityNotFoundException;
 import com.polezhaiev.banksystemapi.exception.UserRegistrationException;
 import com.polezhaiev.banksystemapi.mapper.UserMapper;
@@ -12,11 +12,14 @@ import com.polezhaiev.banksystemapi.model.User;
 import com.polezhaiev.banksystemapi.repository.BankCardRepository;
 import com.polezhaiev.banksystemapi.repository.UserRepository;
 import com.polezhaiev.banksystemapi.service.user.UserService;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +28,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BankCardRepository bankCardRepository;
 
+    @Transactional
     @Override
     public UserResponseDto register(UserRegistrationRequestDto requestDto) {
         if (userRepository.findByEmail(requestDto.getEmail()).isPresent()) {
@@ -40,8 +44,11 @@ public class UserServiceImpl implements UserService {
         bankCard.setCardNumber(requestDto.getBankCard());
         BankCard savedBankCard = bankCardRepository.save(bankCard);
 
-        saved.getBankCards().add(savedBankCard);
-        User savedUser = userRepository.save(saved);
+        User fromRepo = userRepository.findById(saved.getId()).get();
+        Set<BankCard> mutableBankCards = new HashSet<>(fromRepo.getBankCards());
+        mutableBankCards.add(savedBankCard);
+        fromRepo.setBankCards(mutableBankCards);
+        User savedUser = userRepository.save(fromRepo);
 
         return userMapper.toResponseDto(savedUser);
     }

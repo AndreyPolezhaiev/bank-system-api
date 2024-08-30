@@ -39,7 +39,7 @@ public class User {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany
+    @OneToMany()
     @JoinTable(name = "users_bank_cards",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "bank_card_id"))

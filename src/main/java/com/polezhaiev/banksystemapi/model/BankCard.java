@@ -30,9 +30,7 @@ public class BankCard {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne
-    @JoinColumn(nullable = false,
-            name = "user_id",
-            columnDefinition = "int default 0")
+    @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
     public BankCard() {
