@@ -1,4 +1,4 @@
-package com.polezhaiev.banksystemapi.dto;
+package com.polezhaiev.banksystemapi.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
@@ -9,11 +9,15 @@ import lombok.Data;
 
 @Data
 public class UserRegistrationRequestDto {
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String phoneNumber;
     @Email
     private String email;
+    @NotNull
     private String password;
     @Size(min = 16)
     private String bankCard;

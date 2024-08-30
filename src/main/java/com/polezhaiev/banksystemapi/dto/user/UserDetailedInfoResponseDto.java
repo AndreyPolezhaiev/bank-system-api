@@ -1,4 +1,4 @@
-package com.polezhaiev.banksystemapi.dto;
+package com.polezhaiev.banksystemapi.dto.user;
 
 import java.math.BigDecimal;
 import java.util.Map;

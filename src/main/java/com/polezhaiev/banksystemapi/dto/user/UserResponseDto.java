@@ -1,4 +1,4 @@
-package com.polezhaiev.banksystemapi.dto;
+package com.polezhaiev.banksystemapi.dto.user;
 
 import lombok.Data;
 
