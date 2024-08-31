@@ -12,11 +12,9 @@ import com.polezhaiev.banksystemapi.model.User;
 import com.polezhaiev.banksystemapi.repository.BankCardRepository;
 import com.polezhaiev.banksystemapi.repository.UserRepository;
 import com.polezhaiev.banksystemapi.service.user.UserService;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

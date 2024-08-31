@@ -5,7 +5,7 @@ import com.polezhaiev.banksystemapi.dto.transaction.DepositRequestDto;
 import com.polezhaiev.banksystemapi.dto.transaction.TransferRequestDto;
 import com.polezhaiev.banksystemapi.dto.transaction.TransferResponseDto;
 import com.polezhaiev.banksystemapi.dto.transaction.WithdrawRequestDto;
-import com.polezhaiev.banksystemapi.exception.app.TransactionLackOfMoneyException;
+import com.polezhaiev.banksystemapi.exception.app.LackOfMoneyException;
 import com.polezhaiev.banksystemapi.model.BankCard;
 import com.polezhaiev.banksystemapi.model.User;
 import com.polezhaiev.banksystemapi.repository.BankCardRepository;
@@ -65,7 +65,7 @@ public class TransactionServiceImpl implements TransactionService {
                 );
 
         if (bankCard.getBalance().compareTo(requestDto.getWithdrawFounds()) < 0) {
-            throw new TransactionLackOfMoneyException("Not enough money on the balance to withdraw");
+            throw new LackOfMoneyException("Not enough money on the balance to withdraw");
         }
         bankCard.setBalance(bankCard.getBalance().subtract(requestDto.getWithdrawFounds()));
         BankCard updatedCard = bankCardRepository.save(bankCard);
@@ -108,7 +108,7 @@ public class TransactionServiceImpl implements TransactionService {
                 );
 
         if (bankCardSend.getBalance().compareTo(requestDto.getTransferFounds()) < 0) {
-            throw new TransactionLackOfMoneyException("Not enough money on the balance to send");
+            throw new LackOfMoneyException("Not enough money on the balance to send");
         }
 
         bankCardSend.setBalance(bankCardSend.getBalance().subtract(requestDto.getTransferFounds()));
