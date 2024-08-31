@@ -37,8 +37,8 @@ public class UserController {
     }
 
     @GetMapping()
-    @Operation(summary = "Find all users by the phone number", description = "Find all users by the phone number")
-    public List<UserResponseDto> getDetailedInfo() {
+    @Operation(summary = "Find all users", description = "Find all users")
+    public List<UserResponseDto> findAll() {
         return userService.findAll();
     }
 }

@@ -10,7 +10,6 @@ import com.polezhaiev.banksystemapi.model.User;
 import com.polezhaiev.banksystemapi.repository.BankCardRepository;
 import com.polezhaiev.banksystemapi.repository.UserRepository;
 import com.polezhaiev.banksystemapi.service.user.impl.UserServiceImpl;
-
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
