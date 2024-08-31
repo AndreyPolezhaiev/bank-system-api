@@ -4,9 +4,26 @@ Project "bank-system-api" was created to solve the problem of the hard system of
 Now users can simply make deposit, withdraw and transfer money with entered the email, the bank card and founds.
 They get understandable response how much money they invested, withdrew ,sent.
 
+## **Instruction how to run a project:**
+Pull the repository using git command: 
+`git pull https://github.com/AndreyPolezhaiev/bank-system-api.git`
+
+Set your database properties in `src/main/resources/application.properties`,
+you need to change the properties only like:
+```
+    spring.datasource.url=jdbc:mysql://localhost:your_port/bank_system?createDatabaseIfNotExist=true
+    spring.datasource.username=your_username
+    spring.datasource.password=your_password
+    spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+    
+    spring.jpa.hibernate.ddl-auto=create-drop
+    spring.jpa.show-sql=true
+```
+And then run the project!
+
 ## **Technologies:**
 
-Spring Boot, Spring Data JPA, Hibernate, Java Core, OOP, Junit, Maven, Git and SQL.
+Spring Boot, Spring Data JPA, Spring Web, Hibernate, Java Core, OOP, Junit, Maven, Git and SQL.
 
 ## **Controllers:**
 
@@ -22,7 +39,7 @@ People using GitHub can pull my project and make some corrections, improve the p
 Making a "Car-Sharing-App" I faced to make correct registration.
 I spent more time to understand what is the problem, and this was that I tried
 to change immutable object, I fixed it and all got worked.
-Also, I knew how make local tests without Docker. 
+Also, I knew how make local tests without Docker.
 
 ## **Postman queries:**
 
