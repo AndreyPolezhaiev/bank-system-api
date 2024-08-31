@@ -5,8 +5,14 @@ Now users can simply make deposit, withdraw and transfer money with entered the 
 They get understandable response how much money they invested, withdrew, sent.
 
 ## **Instruction how to run a project:**
-Pull the repository using git command: 
+In IntelliJ Idea create a new project from version control and paste the url of repository:
+`https://github.com/AndreyPolezhaiev/bank-system-api.git`
+
+Or pull the repository using git command: 
 `git pull https://github.com/AndreyPolezhaiev/bank-system-api.git`
+
+Or clone the repository using git command:
+`git clone https://github.com/AndreyPolezhaiev/bank-system-api.git`
 
 Set your database properties in `src/main/resources/application.properties`,
 you need to change the properties only like:
