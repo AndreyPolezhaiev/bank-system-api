@@ -2,7 +2,7 @@
 
 Project "bank-system-api" was created to solve the problem of the hard system of transfer money.
 Now users can simply make deposit, withdraw and transfer money with entered the email, the bank card and founds only.
-They get understandable response how much money they invested, withdrew ,sent.
+They get understandable response how much money they invested, withdrew, sent.
 
 ## **Instruction how to run a project:**
 Pull the repository using git command: 
